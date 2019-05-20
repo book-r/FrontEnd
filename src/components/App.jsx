@@ -6,14 +6,17 @@ import AuthForm from './AuthForm';
 import Catalog from './Catalog';
 import FeaturedBook from './FeaturedBook';
 import BookDetail from './BookDetail';
-import PrivateRoute from './PrivateRotue';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
   return (
     <div className="App">
-      <AuthForm />
       <Catalog />
 
+      <Route
+        path='/login'
+        component={AuthForm}
+      />
       <PrivateRoute
         path='/book/:id'
         component={BookDetail}

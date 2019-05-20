@@ -6,6 +6,7 @@ import AuthForm from './AuthForm';
 import Catalog from './Catalog';
 import FeaturedBook from './FeaturedBook';
 import BookDetail from './BookDetail';
+import PrivateRoute from './PrivateRotue';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <AuthForm />
       <Catalog />
 
-      <Route
+      <PrivateRoute
         path='/book/:id'
         component={BookDetail}
       />

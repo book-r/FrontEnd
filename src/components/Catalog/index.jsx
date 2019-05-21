@@ -8,17 +8,16 @@ class Catalog extends Component {
 
   componentDidMount() {
     // Dispatch action to pull catalog data
-    console.log('mounted');
     this.props.getBooks();
   }
 
   render() { 
     return (
       <div className="Catalog">
-        <h1>List of Books</h1>
+        <h3>Catalog Page</h3>
         {
           this.props.books.map(book => (
-            <Book {...book} />
+            <Book {...book} key={book.id} />
           ))
         }
       </div>

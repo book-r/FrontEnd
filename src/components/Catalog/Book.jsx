@@ -1,15 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import style from './Catalog.module.scss';
 
 const Book = (props) => {
-  console.log(props);
   return (
-    <div className={style.Book}>
-      <h3>Book Item</h3>
-
-    </div>
-    // Link to props.id
+    <Link className={style.Book} to={`/book/${props.id}`}>
+      <h3>{props.title}</h3>
+    </Link>
   );
 }
  

@@ -1,17 +1,18 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import './App.css';
+import style from './App.module.scss';
 import AuthForm from './AuthForm';
 import Catalog from './Catalog';
 import FeaturedBook from './FeaturedBook';
 import BookDetail from './BookDetail';
 import PrivateRoute from './PrivateRoute';
+import Navigation from './Navigation';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Navigation Here</h1>
+    <div className={style.App}>
+      <Navigation />
       <Route path='/login' component={AuthForm} />
       <Route path='/join' component={AuthForm} />
       <Route path='/featured/:id' component={FeaturedBook} />

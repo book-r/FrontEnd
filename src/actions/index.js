@@ -71,3 +71,14 @@ export const getBooks = () => dispatch => {
       });
     });
 }
+
+
+// Auth Actions
+export const checkAuth = () => dispatch => {
+  if (localStorage.getItem('authToken')) {
+    dispatch({
+      type: LOGIN_SUCCESS, // TODO: Refactor this to AUTH_SUCCESS?
+      payload: localStorage.getItem('authToken'),
+    });
+  }
+}

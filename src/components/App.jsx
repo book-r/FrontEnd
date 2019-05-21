@@ -14,6 +14,7 @@ function App() {
   return (
     <div className={style.App}>
       <Navigation />
+
       <Switch>
         <Route path='/login' component={AuthForm} />
         <Route path='/join' component={AuthForm} />

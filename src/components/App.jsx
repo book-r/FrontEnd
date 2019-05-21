@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import style from './App.module.scss';
 import AuthForm from './AuthForm';
@@ -8,9 +9,10 @@ import FeaturedBook from './FeaturedBook';
 import BookDetail from './BookDetail';
 import PrivateRoute from './PrivateRoute';
 import Navigation from './Navigation';
+import { checkAuth } from '../actions';
 
-function App() {
-  
+const App = (props) => {
+  props.checkAuth();
   return (
     <div className={style.App}>
       <Navigation />
@@ -29,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { checkAuth })(App);

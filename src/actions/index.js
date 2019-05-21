@@ -36,13 +36,17 @@ export const JOIN_TEST = 'JOIN_TEST';
 export const joinAction = () => dispatch => {
   dispatch({
     type: JOIN_TEST,
+    payload: 'abc',
   });
+  localStorage.setItem('authToken', 'abc');
 };
 
 export const loginAction = () => dispatch => {
   dispatch({
     type: LOGIN_TEST,
+    payload: 'abc',
   });
+  localStorage.setItem('authToken', 'abc');
 };
 
 
@@ -104,4 +108,12 @@ export const checkAuth = () => dispatch => {
       payload: localStorage.getItem('authToken'),
     });
   }
+}
+
+export const LOGOUT_START = 'LOGOUT_START';
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOGOUT_START,
+  });
+  localStorage.removeItem('authToken');
 }

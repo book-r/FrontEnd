@@ -10,6 +10,7 @@ import {
   GET_BOOK_SUCCESS,
   GET_BOOK_FAIL,
   GET_BOOK_START,
+  LOGOUT_START,
 } from '../actions';
 
 const initialState = ({
@@ -73,9 +74,20 @@ const rootReducer = (state = initialState, action) => {
 
     // TEMP TEST CASES
     case JOIN_TEST:
-      return state;
+      return {
+        ...state,
+        auth: true,
+      };
     case LOGIN_TEST:
-      return state;
+      return {
+        ...state,
+        auth: true,
+      };
+    case LOGOUT_START:
+      return {
+        ...state,
+        auth: false,
+      };
     default:
       return state;
   }

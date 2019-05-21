@@ -7,12 +7,16 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  GET_BOOK_SUCCESS,
+  GET_BOOK_FAIL,
+  GET_BOOK_START,
 } from '../actions';
 
 const initialState = ({
   books: [],
   asyncAction: false,
   error: '',
+  bookDetail: {},
 });
 
 const rootReducer = (state = initialState, action) => {
@@ -54,6 +58,16 @@ const rootReducer = (state = initialState, action) => {
         asyncAction: false,
         error: action.payload,
       };
+
+    case GET_BOOK_START:
+      return state;
+    case GET_BOOK_SUCCESS:
+      return {
+        ...state,
+        bookDetail: action.payload,
+      };
+    case GET_BOOK_FAIL:
+      return state;
 
     // JOIN REDUCERS
 

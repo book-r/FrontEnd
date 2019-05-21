@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { getBook } from '../../actions';
 import Review from './Review';
 
 class BookDetail extends Component {
@@ -9,11 +10,13 @@ class BookDetail extends Component {
   };
   
   componentDidMount() {
+    const { match, getBook } = this.props;
     // Dispatch action to get details for this book on props.
-    // this.props.getBook(props.id);
+    getBook(match.params.id)
   }
 
   handleOnClick = (event) => {
+    console.log(this.props);
     this.setState({
       ...this.state,
       reviewing: !this.state.reviewing,
@@ -23,7 +26,10 @@ class BookDetail extends Component {
   render() { 
     return (
       <div>
-        Single Book Detail Page
+        <h3>
+          Single Book Detail Page
+        </h3>
+        <div>{this.props.title}</div>
         <span onClick={this.handleOnClick}>Review</span>
         {
           this.state.reviewing && <Review />
@@ -32,5 +38,9 @@ class BookDetail extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ bookDetail }) => ({
+  ...bookDetail,
+});
  
-export default BookDetail;
+export default connect(mapStateToProps, { getBook })(BookDetail);

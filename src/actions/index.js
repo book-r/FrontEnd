@@ -16,6 +16,7 @@ export const login = (credentials) => dispatch => {
   dispatch({
     type: LOGIN_START,
   });
+
   axios
     .post(`${baseEndpoint}/auth`, credentials)
     .then(({ data }) => {
@@ -54,6 +55,7 @@ export const getBooks = () => dispatch => {
   dispatch({
     type: GET_BOOKS_START,
   });
+
   axios
     .get(`${baseEndpoint}/books`)
     .then(({ data }) => {
@@ -72,6 +74,27 @@ export const getBooks = () => dispatch => {
     });
 }
 
+// Book Detail Actions
+export const GET_BOOK_START = 'GET_BOOK_START';
+export const GET_BOOK_SUCCESS = 'GET_BOOK_SUCCESS';
+export const GET_BOOK_FAIL = 'GET_BOOK_FAIL';
+export const getBook = id => dispatch => {
+  dispatch({
+    type: GET_BOOK_START,
+  });
+  
+  return axios
+    .get(`${baseEndpoint}/books/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: GET_BOOK_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(({ response }) => {
+      console.log(cleanError(response));
+    });
+}
 
 // Auth Actions
 export const checkAuth = () => dispatch => {

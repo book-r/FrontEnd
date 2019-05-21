@@ -16,10 +16,18 @@ class Catalog extends Component {
     return (
       <div className="Catalog">
         <h1>List of Books</h1>
-        <Book />
+        {
+          this.props.books.map(book => (
+            <Book {...book} />
+          ))
+        }
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ books }) => ({
+  books
+});
  
-export default connect(null, { getBooks })(Catalog);
+export default connect(mapStateToProps, { getBooks })(Catalog);

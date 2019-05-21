@@ -40,7 +40,12 @@ export const getBooks = () => dispatch => {
         payload: data,
       });
     })
-    .catch(error => {
-      console.log(error);
+    .catch(({ response }) => {
+      // handle cases where error isn't handled properly server side
+      const message = response.data.message ? response.data.message : `${response.status} ${response.statusText}`;
+      dispatch({
+        type: GET_BOOKS_FAIL,
+        payload: message,
+      });
     });
 }

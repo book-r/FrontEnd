@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const BookDetail = (props) => {
-  return (
-    <h3>Single Book Detail Page</h3>
-  );
+class BookDetail extends Component {
+  
+  componentDidMount() {
+    // Dispatch action to get details for this book on props.
+  }
+
+  render() { 
+    return (
+      <div>
+        Single Book Detail Page
+      </div>
+    );
+  }
 }
-
+ 
 export default BookDetail;

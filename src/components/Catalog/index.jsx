@@ -8,6 +8,11 @@ class Catalog extends Component {
       books: [],
     };
   }
+
+  componentDidMount() {
+    // Dispatch action to pull catalog data
+  }
+
   render() { 
     return (
       <div className="Catalog">

@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { loginAction, joinAction } from '../../actions';
 import Login from './Login';
 import Join from './Join';
+import style from './AuthForm.module.scss';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class AuthForm extends Component {
     const { username, password } = this.state;
     const { loginAction, joinAction } = this.props;
     return (
-      <div className='AuthForm'>
+      <div className={style.AuthForm}>
         <NavLink to='/login'>Login</NavLink>
         <NavLink to='/join'>Join</NavLink>
         {

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import style from './AuthForm.module.scss';
+
 const Login = (props) => {
   const {
     username,
@@ -17,7 +19,7 @@ const Login = (props) => {
   
   return (
     <>
-      <h3>Please Login</h3>
+      <h3 className={style.Login}>Please Login</h3>
       <form onSubmit={handleOnSubmit}>
         <input
           type='text'

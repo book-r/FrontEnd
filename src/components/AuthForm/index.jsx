@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
+import { loginAction, joinAction } from '../../actions';
+import Login from './Login';
+import Join from './Join';
 
 class AuthForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'Taz',
+      username: '',
       password: '',
     }
   }
 
-  handleOnSubmit = (event) => {
-    event.preventDefault();
-    console.log('credentials:', {...this.state});
-    // Handle Login Auth
-  };
-
   handleOnChange = (event) => {
-    console.log(event.target.name);
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value,
@@ -24,33 +23,38 @@ class AuthForm extends Component {
   };
 
   render() {
-    const { username, password } = this.state; 
+    const { username, password } = this.state;
+    const { loginAction, joinAction } = this.props;
     return (
       <div className='AuthForm'>
-        <form onSubmit={this.handleOnSubmit}>
-          <input
-            type='text'
-            name='username'
-            placeholder='Username'
-            value={username}
-            onChange={this.handleOnChange}
-
-            />
-          <input
-            type='password'
-            name='password'
-            placeholder='Password'
-            value={password}
-            onChange={this.handleOnChange}
-          />
-          <input
-            type='submit'
-            value='Login'
-          />
-        </form>
+        <NavLink to='/login'>Login</NavLink>
+        <NavLink to='/join'>Join</NavLink>
+        {
+          this.props.match.path === '/login'
+            ? (
+                <>
+                  <Login
+                    username={username}
+                    password={password}
+                    handleOnChange={this.handleOnChange}
+                    action={loginAction}
+                  />
+                </>
+              )
+            : (
+              <>
+                <Join
+                  username={username}
+                  password={password}
+                  handleOnChange={this.handleOnChange}
+                  action={joinAction}
+                />
+              </>
+            )
+        }
       </div>
     );
   }
 }
  
-export default AuthForm;
+export default connect(null, { loginAction, joinAction })(AuthForm);

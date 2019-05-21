@@ -13,18 +13,11 @@ function App() {
     <div className="App">
       <Catalog />
 
-      <Route
-        path='/login'
-        component={AuthForm}
-      />
-      <PrivateRoute
-        path='/book/:id'
-        component={BookDetail}
-      />
-      <Route
-        path='/featured/:id'
-        component={FeaturedBook}
-      />
+      <Route path='/login' component={AuthForm} />
+      <Route path='/join' component={AuthForm} />
+      <Route path='/featured/:id' component={FeaturedBook} />
+
+      <PrivateRoute path='/book/:id' component={BookDetail} />
     </div>
   );
 }

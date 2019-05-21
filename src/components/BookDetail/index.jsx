@@ -13,7 +13,10 @@ class BookDetail extends Component {
   componentDidMount() {
     const { match, getBook } = this.props;
     // Dispatch action to get details for this book on props.
-    getBook(match.params.id)
+    console.log(this.props);
+    if (match) {
+      getBook(match.params.id);
+    }
   }
 
   handleOnClick = (event) => {
@@ -40,8 +43,9 @@ class BookDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ bookDetail }) => ({
+const mapStateToProps = ({ bookDetail }, ownProps) => ({
   ...bookDetail,
+  t: ownProps,
 });
  
 export default connect(mapStateToProps, { getBook })(BookDetail);

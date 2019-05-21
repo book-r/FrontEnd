@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { checkAuth, logout } from '../../actions';
@@ -19,7 +19,7 @@ const Navigation = (props) => {
         Navigation Component
       </div>
       {
-        props.auth ? <span onClick={handleLogOut}>Log Out</span> : <span>Log In</span>
+        props.auth ? <span onClick={handleLogOut}>Log Out</span> : <Link to='/login'>Log In</Link>
       }
     </nav>
   );

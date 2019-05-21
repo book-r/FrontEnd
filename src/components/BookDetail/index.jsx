@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { getBook } from '../../actions';
 import Review from './Review';
+import style from './BookDetail.module.scss';
 
 class BookDetail extends Component {
   state = {
@@ -30,7 +31,7 @@ class BookDetail extends Component {
           Single Book Detail Page
         </h3>
         <div>{this.props.title}</div>
-        <span onClick={this.handleOnClick}>Review</span>
+        <span className={style.review} onClick={this.handleOnClick}>Review</span>
         {
           this.state.reviewing && <Review />
         }

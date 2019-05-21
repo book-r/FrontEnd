@@ -1,3 +1,7 @@
+import axios from "axios";
+
+const baseEndpoint = 'http://localhost:3500/api';
+
 // Login
 
 
@@ -17,3 +21,26 @@ export const loginAction = () => dispatch => {
     type: LOGIN_TEST,
   });
 };
+
+
+// Catalog Actions
+export const GET_BOOKS_START = 'GET_BOOKS_START';
+export const GET_BOOKS_SUCCESS = 'GET_BOOKS_SUCCESS';
+export const GET_BOOKS_FAIL = 'GET_BOOKS_FAIL';
+
+export const getBooks = () => dispatch => {
+  dispatch({
+    type: GET_BOOKS_START,
+  });
+  axios
+    .get(`${baseEndpoint}/books`)
+    .then(({ data }) => {
+      dispatch({
+        type: GET_BOOKS_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}

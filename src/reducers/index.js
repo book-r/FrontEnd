@@ -11,13 +11,17 @@ import {
   GET_BOOK_FAIL,
   GET_BOOK_START,
   LOGOUT_START,
+  GET_COMMENTS_START,
+  GET_COMMENTS_SUCCESS,
 } from '../actions';
 
 const initialState = ({
   books: [],
   asyncAction: false,
   error: '',
-  bookDetail: {},
+  bookDetail: {
+    comments: []
+  },
 });
 
 const rootReducer = (state = initialState, action) => {
@@ -65,10 +69,29 @@ const rootReducer = (state = initialState, action) => {
     case GET_BOOK_SUCCESS:
       return {
         ...state,
-        bookDetail: action.payload,
+        bookDetail: {
+          ...action.payload,
+          comments: state.bookDetail.comments,
+        },
       };
     case GET_BOOK_FAIL:
       return state;
+
+    // COMMENTS REDUCERS
+    case GET_COMMENTS_START:
+      return {
+        ...state,
+        asyncAction: action.type,
+      };
+    case GET_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        asyncAction: false,
+        bookDetail: {
+          ...state.bookDetail,
+          comments: action.payload,
+        }
+      };
 
     // JOIN REDUCERS
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getBook } from '../../actions';
+import { getBook, getComments } from '../../actions';
 import Review from './Review';
 import style from './BookDetail.module.scss';
+import Comments from '../Comments';
 
 class BookDetail extends Component {
   state = {
@@ -11,16 +12,15 @@ class BookDetail extends Component {
   };
   
   componentDidMount() {
-    const { match, getBook } = this.props;
+    const { match, getBook, getComments } = this.props;
     // Dispatch action to get details for this book on props.
-    console.log(this.props);
     if (match) {
       getBook(match.params.id);
+      getComments();
     }
   }
 
   handleOnClick = (event) => {
-    console.log(this.props);
     this.setState({
       ...this.state,
       reviewing: !this.state.reviewing,
@@ -37,6 +37,7 @@ class BookDetail extends Component {
         <img src={this.props.cover_url} alt={this.props.title} />
         <div className={style.review} onClick={this.handleOnClick}>Review</div>
         <div>{this.props.description}</div>
+        <Comments />
         {
           this.state.reviewing && <Review />
         }
@@ -50,4 +51,4 @@ const mapStateToProps = ({ bookDetail }, ownProps) => ({
   t: ownProps,
 });
  
-export default connect(mapStateToProps, { getBook })(BookDetail);
+export default connect(mapStateToProps, { getBook, getComments })(BookDetail);

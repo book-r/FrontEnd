@@ -118,3 +118,23 @@ export const logout = () => dispatch => {
   });
   localStorage.removeItem('authToken');
 }
+
+export const GET_COMMENTS_START = 'GET_COMMENTS_START';
+export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
+export const GET_COMMENTS_FAIL = 'GET_COMMENTS_FAIL';
+
+export const getComments = () => dispatch => {
+  dispatch({
+    type: GET_COMMENTS_START,
+  });
+
+  axios
+    .get(`${baseEndpoint}/reviews`)
+    .then(({ data }) => {
+      dispatch({
+        type: GET_COMMENTS_SUCCESS,
+        payload: data,
+      });
+    })
+    .catch();
+}

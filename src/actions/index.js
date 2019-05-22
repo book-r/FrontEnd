@@ -9,27 +9,6 @@ const cleanError = (response) => {
   return response.data.message ? response.data.message : `${response.status} ${response.statusText}`;
 }
 
-// Login Actions
-export const LOGIN_START = 'LOGIN_START';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
-
-export const login = (credentials) => dispatch => {
-  dispatch({
-    type: LOGIN_START,
-  });
-
-  axios
-    .post(`${baseEndpoint}/auth`, credentials)
-    .then(({ data }) => {
-      console.log(data);
-      // TODO: Store token in local storage and send dispatch to updated logged in status on state
-    })
-    .catch(({ response }) => {
-      console.log(cleanError(response));
-    });
-}
-
 // Auth Actions
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -43,8 +22,7 @@ export const authenticate = (credentials, action) => dispatch => {
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
       const { token } = data;
-      auth.set(token);
-      // localStorage.setItem('authToken', token);
+      auth.add(token);
       dispatch({
         type: AUTH_SUCCESS,
         payload: token,
@@ -58,12 +36,10 @@ export const checkAuth = () => dispatch => {
   if (auth.get()) {
     dispatch({
       type: AUTH_SUCCESS,
-      // payload: localStorage.getItem('authToken'),
       payload: auth.get(),
     });
   }
 }
-
 
 // Catalog Actions
 export const GET_BOOKS_START = 'GET_BOOKS_START';

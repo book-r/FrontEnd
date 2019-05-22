@@ -1,4 +1,5 @@
 import axios from "axios";
+import auth from '../helpers/auth';
 
 // const baseEndpoint = 'http://localhost:3500/api';
 const baseEndpoint = 'https://lambda-bookr.herokuapp.com/api';
@@ -42,7 +43,8 @@ export const authenticate = (credentials, action) => dispatch => {
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
       const { token } = data;
-      localStorage.setItem('authToken', token);
+      auth.set(token);
+      // localStorage.setItem('authToken', token);
       dispatch({
         type: AUTH_SUCCESS,
         payload: token,
@@ -52,26 +54,15 @@ export const authenticate = (credentials, action) => dispatch => {
       console.log(cleanError(response));
     });
 }
-
-
-export const LOGIN_TEST = 'LOGIN_TEST';
-export const JOIN_TEST = 'JOIN_TEST';
-
-export const joinAction = () => dispatch => {
-  dispatch({
-    type: JOIN_TEST,
-    payload: 'abc',
-  });
-  localStorage.setItem('authToken', 'abc');
-};
-
-export const loginAction = () => dispatch => {
-  dispatch({
-    type: LOGIN_TEST,
-    payload: 'abc',
-  });
-  localStorage.setItem('authToken', 'abc');
-};
+export const checkAuth = () => dispatch => {
+  if (auth.get()) {
+    dispatch({
+      type: AUTH_SUCCESS,
+      // payload: localStorage.getItem('authToken'),
+      payload: auth.get(),
+    });
+  }
+}
 
 
 // Catalog Actions
@@ -122,16 +113,6 @@ export const getBook = id => dispatch => {
     .catch(({ response }) => {
       console.log(cleanError(response));
     });
-}
-
-// Auth Actions
-export const checkAuth = () => dispatch => {
-  if (localStorage.getItem('authToken')) {
-    dispatch({
-      type: AUTH_SUCCESS, // TODO: Refactor this to AUTH_SUCCESS?
-      payload: localStorage.getItem('authToken'),
-    });
-  }
 }
 
 export const LOGOUT_START = 'LOGOUT_START';

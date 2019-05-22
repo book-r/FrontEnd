@@ -1,6 +1,4 @@
 import {
-  LOGIN_TEST,
-  JOIN_TEST,
   GET_BOOKS_START,
   GET_BOOKS_SUCCESS,
   GET_BOOKS_FAIL,
@@ -23,6 +21,11 @@ const initialState = ({
   bookDetail: {
     reviews: []
   },
+  user: {
+    name: '',
+    token: false,
+    id: null,
+  }
 });
 
 const rootReducer = (state = initialState, action) => {
@@ -98,16 +101,6 @@ const rootReducer = (state = initialState, action) => {
     // JOIN REDUCERS
 
     // TEMP TEST CASES
-    case JOIN_TEST:
-      return {
-        ...state,
-        auth: true,
-      };
-    case LOGIN_TEST:
-      return {
-        ...state,
-        auth: true,
-      };
     case LOGOUT_START:
       return {
         ...state,

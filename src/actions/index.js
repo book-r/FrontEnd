@@ -13,6 +13,7 @@ const cleanError = (response) => {
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
+
 export const authenticate = (credentials, action) => dispatch => {
   dispatch({
     type: AUTH_START,
@@ -32,6 +33,7 @@ export const authenticate = (credentials, action) => dispatch => {
       console.log(cleanError(response));
     });
 }
+
 export const checkAuth = () => dispatch => {
   if (auth.get()) {
     dispatch({
@@ -97,26 +99,4 @@ export const logout = () => dispatch => {
     type: LOGOUT_START,
   });
   localStorage.removeItem('authToken');
-}
-
-
-// TODO: refactor and remove this in favor of the single API call
-export const GET_COMMENTS_START = 'GET_COMMENTS_START';
-export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
-export const GET_COMMENTS_FAIL = 'GET_COMMENTS_FAIL';
-
-export const getComments = () => dispatch => {
-  dispatch({
-    type: GET_COMMENTS_START,
-  });
-
-  axios
-    .get(`${baseEndpoint}/reviews`)
-    .then(({ data }) => {
-      dispatch({
-        type: GET_COMMENTS_SUCCESS,
-        payload: data,
-      });
-    })
-    .catch();
 }

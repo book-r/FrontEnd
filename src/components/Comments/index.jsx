@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Comment from './Comment';
-import { getComments } from '../../actions';
 
 const Comments = (props) => {
   console.log(props);
@@ -19,4 +18,4 @@ const mapStateToProps = ({ bookDetail: { id, reviews } }) => ({
   reviews,
 });
 
-export default connect(mapStateToProps, { getComments })(Comments);
+export default connect(mapStateToProps, { })(Comments);

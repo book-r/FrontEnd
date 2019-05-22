@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
 
-
-import { getBook, getComments } from '../../actions';
+import { getBook } from '../../actions';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
@@ -14,10 +13,9 @@ class BookDetail extends Component {
   };
   
   componentDidMount() {
-    const { match, getBook, getComments } = this.props;
+    const { match, getBook } = this.props;
     if (match) {
       getBook(match.params.id);
-      getComments();
     }
   }
 
@@ -62,4 +60,4 @@ const mapStateToProps = ({ bookDetail }, ownProps) => ({
   t: ownProps,
 });
  
-export default connect(mapStateToProps, { getBook, getComments })(BookDetail);
+export default connect(mapStateToProps, { getBook })(BookDetail);

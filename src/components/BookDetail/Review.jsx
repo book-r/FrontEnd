@@ -26,7 +26,6 @@ class Review extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     console.log('payload:', {...this.state});
-    // trigger  post review action
     this.props.handleAddReview({
       ...this.state,
     });
@@ -52,7 +51,11 @@ class Review extends Component {
       <div className={style.ReviewModal}>
         <div className={style.ReviewModal__overlay}>
           <div className={style.ReviewModal__form} ref={node => this.node = node}>
-            Review Component
+            <h2>Create Review</h2>
+            <img className={style.ReviewModal__thumbnail} src={this.props.cover_url} alt={`${this.props.title} cover thumbnail`}/>
+            <span className={style.ReviewModal__title}>{this.props.title}</span>
+            <hr />
+            <h3>Rating</h3>
             <ReactStars
               value={this.state.rating}
               count={5}
@@ -62,11 +65,13 @@ class Review extends Component {
               color2={'#ffd700'}
               className={style.ReviewModal__form__stars}
             />
+            <h3>Write your review</h3><span>(optional)</span>
             <form onSubmit={this.handleOnSubmit}>
               <textarea
                 className={style.ReviewModal__form__comment}
                 name="comment"
                 id="comment"
+                placeholder="This book was..."
                 value={this.state.comment}
                 onChange={this.handleComment}
               />

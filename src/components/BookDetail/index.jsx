@@ -56,7 +56,12 @@ class BookDetail extends Component {
         <div>{this.props.description}</div>
         <Comments />
         {
-          this.state.reviewing && <Review handleToggleReview={this.handleToggleReview} handleAddReview={this.handleAddReview} />
+          this.state.reviewing && <Review
+            handleToggleReview={this.handleToggleReview}
+            handleAddReview={this.handleAddReview}
+            title={this.props.title}
+            cover_url={this.props.cover_url}
+          />
         }
       </div>
     );
@@ -65,10 +70,9 @@ class BookDetail extends Component {
 
 // TODO: Cleanup ownProps or use them
 
-const mapStateToProps = ({ bookDetail, user: { id: userId } }, ownProps) => ({
+const mapStateToProps = ({ bookDetail, user: { id: userId } }) => ({
   ...bookDetail,
   userId,
-  t: ownProps,
 });
  
 export default connect(mapStateToProps, { getBook, addReview })(BookDetail);

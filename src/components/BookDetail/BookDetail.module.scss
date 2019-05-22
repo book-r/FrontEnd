@@ -26,6 +26,14 @@
     right: 0;
   }
 
+  &__title {
+    line-height: 50px;
+  }
+
+  &__thumbnail {
+    height: 50px;
+  }
+
   &__form {
     top: 50%;
     left: 50%;
@@ -41,7 +49,8 @@
     }
 
     &__comment {
-      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
     }
   }
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const baseEndpoint = 'http://localhost:3500/api';
+// const baseEndpoint = 'http://localhost:3500/api';
+const baseEndpoint = 'https://lambda-bookr.herokuapp.com/api';
 
 const cleanError = (response) => {
   // handle cases where error isn't handled properly server side

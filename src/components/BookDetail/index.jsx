@@ -33,8 +33,10 @@ class BookDetail extends Component {
         <h3>
           Single Book Detail Page
         </h3>
-        <div>{this.props.title}</div>
-        <span className={style.review} onClick={this.handleOnClick}>Review</span>
+        <div>{this.props.title} <span>{this.props.average}</span></div>
+        <img src={this.props.cover_url} alt={this.props.title} />
+        <div className={style.review} onClick={this.handleOnClick}>Review</div>
+        <div>{this.props.description}</div>
         {
           this.state.reviewing && <Review />
         }

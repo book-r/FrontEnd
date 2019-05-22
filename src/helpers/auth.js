@@ -1,11 +1,11 @@
-const RECORD = 'authToken';
+const RECORD = 'user';
 
 export const getAuth = () => {
-  return localStorage.getItem(RECORD);
+  return JSON.parse(localStorage.getItem(RECORD));
 }
 
 const addAuth = (payload) => {
-  localStorage.setItem(RECORD, payload);
+  localStorage.setItem(RECORD, JSON.stringify(payload));
 }
 
 const removeAuth = () => {

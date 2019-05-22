@@ -15,7 +15,6 @@ class BookDetail extends Component {
   
   componentDidMount() {
     const { match, getBook, getComments } = this.props;
-    // Dispatch action to get details for this book on props.
     if (match) {
       getBook(match.params.id);
       getComments();
@@ -31,19 +30,19 @@ class BookDetail extends Component {
 
   render() { 
     return (
-      <div>
+      <div className={style.BookDetail}>
         <h3>
           Single Book Detail Page
         </h3>
-        <div>
+        <div className={style.BookDetail__title}>
           {this.props.title}
           <ReactStars
             value={this.props.average}
             count={5}
-            size={24}
+            size={18}
             edit={false}
             color2={'#ffd700'}
-            className={style.ReviewModal__form__stars}
+            className={style.BookDetail__rating}
           />
         </div>
         <img src={this.props.cover_url} alt={this.props.title} />

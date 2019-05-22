@@ -11,6 +11,9 @@ import {
   GET_BOOK_FAIL,
   GET_BOOK_START,
   LOGOUT_START,
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_FAIL,
 } from '../actions';
 
 const initialState = ({
@@ -40,6 +43,26 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         asyncAction: false,
+        error: action.payload,
+      }
+
+    // AUTH REDUCERS
+    case AUTH_START:
+      return {
+        ...state,
+        asyncAction: action.type,
+      }
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        asyncAction: false,
+        auth: true,
+      }
+    case AUTH_FAIL:
+      return {
+        ...state,
+        asyncAction: false,
+        auth: false,
         error: action.payload,
       }
 

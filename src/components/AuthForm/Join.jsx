@@ -2,7 +2,9 @@ import React from 'react';
 
 const Join = (props) => {
   const {
+    handleAuth,
     handleOnChange,
+    action,
     username,
     password,
   } = props;
@@ -10,7 +12,10 @@ const Join = (props) => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
     // TODO: pass props.username and props.password to action
-    props.action();
+    handleAuth({
+      username,
+      password,
+    }, action);
   }
 
   return (

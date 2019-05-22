@@ -1,4 +1,13 @@
 .BookDetail {
+  &__title {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__rating {
+    margin: 0 5px;
+  }
+
   &__review {
     cursor: pointer;
     color: blue;

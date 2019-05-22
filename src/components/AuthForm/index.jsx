@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import { loginAction, joinAction } from '../../actions';
+import { loginAction, joinAction, authenticate } from '../../actions';
 import Login from './Login';
 import Join from './Join';
 import style from './AuthForm.module.scss';
@@ -25,7 +25,6 @@ class AuthForm extends Component {
 
   render() {
     const { username, password } = this.state;
-    const { loginAction, joinAction } = this.props;
     return this.props.auth ? <Redirect to='/' /> : (
         <div className={style.AuthForm}>
         <NavLink to='/login'>Login</NavLink>
@@ -37,8 +36,9 @@ class AuthForm extends Component {
                   <Login
                     username={username}
                     password={password}
+                    action='login'
                     handleOnChange={this.handleOnChange}
-                    action={loginAction}
+                    handleAuth={this.props.authenticate}
                   />
                 </>
               )
@@ -47,8 +47,9 @@ class AuthForm extends Component {
                 <Join
                   username={username}
                   password={password}
+                  action='register'
                   handleOnChange={this.handleOnChange}
-                  action={joinAction}
+                  handleAuth={this.props.authenticate}
                 />
               </>
             )
@@ -62,4 +63,4 @@ const mapStateToProps = ({ auth }) => ({
   auth,
 });
 
-export default connect(mapStateToProps, { loginAction, joinAction })(AuthForm);
+export default connect(mapStateToProps, { authenticate })(AuthForm);

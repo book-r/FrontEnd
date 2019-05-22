@@ -29,7 +29,25 @@ export const login = (credentials) => dispatch => {
     });
 }
 
-// Join
+// Auth Actions
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+export const authenticate = (credentials, action) => dispatch => {
+  dispatch({
+    type: AUTH_START,
+  });
+
+  axios
+    .post(`${baseEndpoint}/auth/${action}`, credentials)
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch(({ response }) => {
+      console.log(cleanError(response));
+    });
+}
+
 
 export const LOGIN_TEST = 'LOGIN_TEST';
 export const JOIN_TEST = 'JOIN_TEST';

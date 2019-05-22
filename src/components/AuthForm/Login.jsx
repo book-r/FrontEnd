@@ -7,6 +7,7 @@ const Login = (props) => {
     username,
     password,
     action,
+    handleAuth,
     handleOnChange,
   } = props;
 
@@ -14,7 +15,10 @@ const Login = (props) => {
     event.preventDefault();
     // TODO: pass username and password to action
     console.log(username, password);
-    action();
+    handleAuth({
+      username,
+      password,
+    }, action);
   }
   
   return (

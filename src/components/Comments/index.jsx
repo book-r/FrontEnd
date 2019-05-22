@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import Comment from './Comment';
 
 const Comments = (props) => {
-  console.log(props);
   return (
     <div>
       Comment Box
-      {props.reviews.map(review => <Comment {...review} />)}
+      {props.reviews.map(review => <Comment {...review} key={review.id} />)}
     </div>
   );
 }

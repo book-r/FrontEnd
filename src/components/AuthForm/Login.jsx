@@ -13,8 +13,6 @@ const Login = (props) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    // TODO: pass username and password to action
-    console.log(username, password);
     handleAuth({
       username,
       password,

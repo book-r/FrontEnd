@@ -41,7 +41,12 @@ export const authenticate = (credentials, action) => dispatch => {
   axios
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
-      console.log(data);
+      const { token } = data;
+      localStorage.setItem('authToken', token);
+      dispatch({
+        type: AUTH_SUCCESS,
+        payload: token,
+      });
     })
     .catch(({ response }) => {
       console.log(cleanError(response));
@@ -123,7 +128,7 @@ export const getBook = id => dispatch => {
 export const checkAuth = () => dispatch => {
   if (localStorage.getItem('authToken')) {
     dispatch({
-      type: LOGIN_SUCCESS, // TODO: Refactor this to AUTH_SUCCESS?
+      type: AUTH_SUCCESS, // TODO: Refactor this to AUTH_SUCCESS?
       payload: localStorage.getItem('authToken'),
     });
   }
@@ -137,6 +142,8 @@ export const logout = () => dispatch => {
   localStorage.removeItem('authToken');
 }
 
+
+// TODO: refactor and remove this in favor of the single API call
 export const GET_COMMENTS_START = 'GET_COMMENTS_START';
 export const GET_COMMENTS_SUCCESS = 'GET_COMMENTS_SUCCESS';
 export const GET_COMMENTS_FAIL = 'GET_COMMENTS_FAIL';

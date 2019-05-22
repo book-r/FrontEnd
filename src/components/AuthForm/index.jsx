@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import { loginAction, joinAction, authenticate } from '../../actions';
+import { authenticate } from '../../actions';
 import Login from './Login';
 import Join from './Join';
 import style from './AuthForm.module.scss';
 
 class AuthForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-    }
+  state = {
+    username: '',
+    password: '',
   }
 
   handleOnChange = (event) => {

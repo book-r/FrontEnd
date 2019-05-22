@@ -38,7 +38,7 @@ const Join = (props) => {
         />
         <input
           type='submit'
-          value='Login'
+          value='Join'
         />
       </form>
     </>

@@ -9,7 +9,7 @@ const Comment = (props) => {
       <div>
         {props.comment}
       </div>
-      <span>by {props.username}</span>
+      <span>by {props.username} {props.userId === props.id && '(You)'}</span>
 
     </div>
   );

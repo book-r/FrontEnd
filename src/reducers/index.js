@@ -5,10 +5,10 @@ import {
   GET_BOOK_SUCCESS,
   GET_BOOK_FAIL,
   GET_BOOK_START,
-  LOGOUT_START,
   AUTH_START,
   AUTH_SUCCESS,
   AUTH_FAIL,
+  AUTH_REMOVE,
 } from '../actions';
 
 const initialState = ({
@@ -65,7 +65,13 @@ const rootReducer = (state = initialState, action) => {
         auth: false,
         error: action.payload,
       }
+    case AUTH_REMOVE:
+      return {
+        ...state,
+        auth: false,
+      }
 
+    // BOOK REDUCERS
     case GET_BOOK_START:
       return state;
     case GET_BOOK_SUCCESS:
@@ -76,14 +82,6 @@ const rootReducer = (state = initialState, action) => {
     case GET_BOOK_FAIL:
       return state;
 
-    // JOIN REDUCERS
-
-    // TEMP TEST CASES
-    case LOGOUT_START:
-      return {
-        ...state,
-        auth: false,
-      };
     default:
       return state;
   }

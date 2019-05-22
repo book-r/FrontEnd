@@ -5,19 +5,18 @@ import Comment from './Comment';
 import { getComments } from '../../actions';
 
 const Comments = (props) => {
-  // TODO: this will hopefully require an id to get all comments for this specific book
-  
+  console.log(props);
   return (
     <div>
       Comment Box
-      {props.comments.map(comment => <Comment {...comment} />)}
+      {props.reviews.map(review => <Comment {...review} />)}
     </div>
   );
 }
 
-const mapStateToProps = ({ bookDetail: { id, comments } }) => ({
+const mapStateToProps = ({ bookDetail: { id, reviews } }) => ({
   id,
-  comments,
+  reviews,
 });
 
 export default connect(mapStateToProps, { getComments })(Comments);

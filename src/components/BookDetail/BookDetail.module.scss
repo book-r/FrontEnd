@@ -1,5 +1,37 @@
-.review {
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
+.BookDetail {
+  &__review {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+}
+
+.ReviewModal {
+  &__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: rgba(20, 20, 20, 0.15);
+    left: 0;
+    right: 0;
+  }
+
+  &__form {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background: pink;
+    width: 50%;
+    max-width: 700px;
+
+    &__stars {
+      display: flex;
+      justify-content: center;
+    }
+
+    &__comment {
+      width: 100%;
+    }
+  }
 }

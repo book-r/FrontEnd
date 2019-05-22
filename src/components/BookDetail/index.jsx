@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
 
-import { getBook } from '../../actions';
+import { getBook, addReview } from '../../actions';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
@@ -19,7 +19,15 @@ class BookDetail extends Component {
     }
   }
 
-  handleToggleReview = (event) => {
+  handleAddReview = review => {
+    this.props.addReview({
+      ...review,
+      book_id: this.props.id,
+      user_id: this.props.userId,
+    });
+  }
+
+  handleToggleReview = () => {
     this.setState({
       ...this.state,
       reviewing: !this.state.reviewing,
@@ -48,16 +56,19 @@ class BookDetail extends Component {
         <div>{this.props.description}</div>
         <Comments />
         {
-          this.state.reviewing && <Review handleToggleReview={this.handleToggleReview} />
+          this.state.reviewing && <Review handleToggleReview={this.handleToggleReview} handleAddReview={this.handleAddReview} />
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ bookDetail }, ownProps) => ({
+// TODO: Cleanup ownProps or use them
+
+const mapStateToProps = ({ bookDetail, user: { id: userId } }, ownProps) => ({
   ...bookDetail,
+  userId,
   t: ownProps,
 });
  
-export default connect(mapStateToProps, { getBook })(BookDetail);
+export default connect(mapStateToProps, { getBook, addReview })(BookDetail);

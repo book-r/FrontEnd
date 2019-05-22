@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosWithAuth from '../config/axiosWithAuth';
 import auth from '../helpers/auth';
 
 // const baseEndpoint = 'http://localhost:3500/api';
@@ -23,11 +24,20 @@ export const authenticate = (credentials, action) => dispatch => {
   axios
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
-      const { token } = data;
-      auth.add(token);
+      const { token, username, id } = data;
+      auth.add({
+        id,
+        username,
+        token,
+      });
+      console.log(data)
       dispatch({
         type: AUTH_SUCCESS,
-        payload: token,
+        payload: {
+          id,
+          username,
+          token,
+        },
       });
     })
     .catch(({ response }) => {
@@ -99,4 +109,28 @@ export const getBook = id => dispatch => {
     .catch(({ response }) => {
       console.log(cleanError(response));
     });
+}
+
+// Review Actions
+export const ADD_REVIEW_START = 'ADD_REVIEW_START';
+export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
+export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
+
+export const addReview = review => dispatch => {
+  dispatch({
+    type: ADD_REVIEW_START,
+  });
+
+  axiosWithAuth()
+  .post(`${baseEndpoint}/reviews`, review)
+  .then(({ data }) => {
+    console.log(data);
+    dispatch({
+      type: ADD_REVIEW_SUCCESS,
+      payload: data,
+    });
+  })
+  .catch(({ response }) => {
+    console.log(cleanError(response));
+  });
 }

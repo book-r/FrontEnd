@@ -18,8 +18,6 @@ class Review extends Component {
   }
 
   handleBlur = event => {
-    console.log('blur event', event);
-    console.log('node check', this.node.contains(event.target));
     if (!this.node.contains(event.target)) {
       this.props.handleToggleReview();
     }
@@ -28,6 +26,10 @@ class Review extends Component {
   handleOnSubmit = event => {
     event.preventDefault();
     console.log('payload:', {...this.state});
+    // trigger  post review action
+    this.props.handleAddReview({
+      ...this.state,
+    });
     this.props.handleToggleReview();
   }
 

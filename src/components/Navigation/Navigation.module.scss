@@ -28,4 +28,11 @@
 
 .Logout {
   cursor: pointer;
+  box-sizing: border-box;
+  border-bottom: 1px solid $primary;
+  
+  &:hover {
+    color: darken($neutral-light, 5);
+    border-bottom: 1px solid darken($neutral-light, 5);
+  }
 }

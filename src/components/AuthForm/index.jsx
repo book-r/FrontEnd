@@ -22,35 +22,44 @@ class AuthForm extends Component {
 
   render() {
     const { username, password } = this.state;
+    const activeStyle = {
+      borderBottom: '1px solid #FCFCFC',
+      background: '#FCFCFC',
+      cursor: 'inherit',
+    };
     return this.props.auth ? <Redirect to='/' /> : (
-        <div className={style.AuthForm}>
-        <NavLink to='/login'>Login</NavLink>
-        <NavLink to='/join'>Join</NavLink>
-        {
-          this.props.match.path === '/login'
-            ? (
+      <div className={style.AuthForm}>
+        <div className={style.AuthForm__wrapper}>
+          <nav className={style.AuthForm__nav}>
+            <NavLink activeStyle={activeStyle} className={style.AuthForm__nav__login} to='/login'>Login</NavLink>
+            <NavLink activeStyle={activeStyle} className={style.AuthForm__nav__join} to='/join'>Sign Up</NavLink>
+          </nav>
+          {
+            this.props.match.path === '/login'
+              ? (
+                  <>
+                    <Login
+                      username={username}
+                      password={password}
+                      action='login'
+                      handleOnChange={this.handleOnChange}
+                      handleAuth={this.props.authenticate}
+                    />
+                  </>
+                )
+              : (
                 <>
-                  <Login
+                  <Join
                     username={username}
                     password={password}
-                    action='login'
+                    action='register'
                     handleOnChange={this.handleOnChange}
                     handleAuth={this.props.authenticate}
                   />
                 </>
               )
-            : (
-              <>
-                <Join
-                  username={username}
-                  password={password}
-                  action='register'
-                  handleOnChange={this.handleOnChange}
-                  handleAuth={this.props.authenticate}
-                />
-              </>
-            )
-        }
+          }
+        </div>
       </div>
     );
   }

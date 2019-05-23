@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getBook, addReview } from '../../actions';
 import convertISBN from '../../helpers/isbn';

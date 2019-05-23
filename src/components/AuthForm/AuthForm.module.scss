@@ -1,0 +1,82 @@
+@import '../../styles/_variables';
+
+.AuthForm {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__input_group {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  &__nav {
+    display: flex;
+    font-size: 20px;
+    font-family: $font-headers;
+    font-weight: 500;
+    letter-spacing: 0.75px;
+
+    &__login, &__join {
+      box-sizing: border-box;
+      width: 50%;
+      text-align: left;
+      text-decoration: none;
+      color: $neutral-dark;
+      padding: 15px;
+      border-bottom: 1px solid $neutral-medium-accent;
+      background: darken($neutral-light, 1);
+
+      &:hover {
+        background: darken($neutral-light, 3)
+      }
+    }
+
+    &__login {
+      border-right: 1px solid $neutral-medium-accent;
+    }
+  }
+
+  &__wrapper {
+    background: $neutral-light-accent;
+    border-radius: 3px;
+    padding-top: 0;
+    border: 1px solid $neutral-medium-accent;
+    min-width: 700px;
+  }
+
+  &__form {
+    padding: 50px 80px;
+    display: flex;
+    flex-direction: column;
+    // padding-bottom: 60px;
+    align-items: flex-start;
+
+    input {
+      height: 40px;
+      padding: 5px 15px;
+      font-size: 18px;
+      box-sizing: border-box;
+      margin: 15px 0;
+      border-radius: 3px;
+    }
+    
+    &__text {
+      width: 100%;
+      background: lighten($neutral-light-accent, 1.5);
+      border: 1px solid $neutral-medium-accent;
+    }
+
+    &__submit {
+      background: $primary;
+      border: 1px solid $primary-accent;
+      color: $neutral-light;
+      letter-spacing: 0.5px;
+      min-width: 50%;
+    }
+  }
+}

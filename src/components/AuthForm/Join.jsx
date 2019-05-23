@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './AuthForm.module.scss';
 
 const Join = (props) => {
   const {
@@ -11,7 +12,6 @@ const Join = (props) => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    // TODO: pass props.username and props.password to action
     handleAuth({
       username,
       password,
@@ -20,9 +20,9 @@ const Join = (props) => {
 
   return (
     <>
-      <h3>Please Join</h3>
-      <form onSubmit={handleOnSubmit}>
+      <form className={style.AuthForm__form} onSubmit={handleOnSubmit}>
         <input
+          className={style.AuthForm__form__text}
           type='text'
           name='username'
           placeholder='Username'
@@ -30,6 +30,7 @@ const Join = (props) => {
           onChange={handleOnChange}
           />
         <input
+          className={style.AuthForm__form__text}
           type='password'
           name='password'
           placeholder='Password'
@@ -37,8 +38,9 @@ const Join = (props) => {
           onChange={handleOnChange}
         />
         <input
+          className={style.AuthForm__form__submit}
           type='submit'
-          value='Join'
+          value='Sign Up'
         />
       </form>
     </>

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import style from './AuthForm.module.scss';
 
 const Login = (props) => {
@@ -21,9 +20,9 @@ const Login = (props) => {
   
   return (
     <>
-      <h3 className={style.Login}>Please Login</h3>
-      <form onSubmit={handleOnSubmit}>
+      <form className={style.AuthForm__form} onSubmit={handleOnSubmit}>
         <input
+          className={style.AuthForm__form__text}
           type='text'
           name='username'
           placeholder='Username'
@@ -31,6 +30,7 @@ const Login = (props) => {
           onChange={handleOnChange}
           />
         <input
+          className={style.AuthForm__form__text}
           type='password'
           name='password'
           placeholder='Password'
@@ -38,6 +38,7 @@ const Login = (props) => {
           onChange={handleOnChange}
         />
         <input
+          className={style.AuthForm__form__submit}
           type='submit'
           value='Login'
         />

@@ -1,3 +1,5 @@
+@import '../../styles/_variables';
+
 .BookDetail {
   &__title {
     display: flex;
@@ -16,6 +18,24 @@
 }
 
 .ReviewModal {
+  h3 {
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $neutral-medium-accent;
+    margin-bottom: 30px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
   &__overlay {
     position: fixed;
     overflow: hidden;
@@ -27,7 +47,8 @@
   }
 
   &__title {
-    line-height: 50px;
+    margin: 0 20px;
+    font-size: 20px;
   }
 
   &__thumbnail {
@@ -39,18 +60,63 @@
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
-    background: pink;
+    background: $neutral-light-accent;
     width: 50%;
     max-width: 700px;
+    border-radius: 3px;
+    padding: 20px;
+    padding-bottom: 30px;
 
     &__stars {
       display: flex;
       justify-content: center;
+      margin-bottom: 30px;
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid $neutral-medium-accent;
     }
 
     &__comment {
       min-width: 100%;
       max-width: 100%;
+      box-sizing: border-box;
+      border: 1px solid $neutral-medium-accent;
+      margin-bottom: 30px;
+      border-radius: 3px;
+      padding: 15px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__submit, &__cancel {
+      margin: 0 15px;
+      background: $neutral-light-accent;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border-radius: 3px;
+      border: 1px solid $neutral-medium-accent;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: darken($neutral-light-accent, 8);
+      }
+    }
+    
+    &__submit {
+      background: $primary;
+      color: $neutral-light;
+      border: 1px solid $primary-accent;
+      
+      &:hover {
+        background: darken($primary, 1.5);
+      }
     }
   }
 }

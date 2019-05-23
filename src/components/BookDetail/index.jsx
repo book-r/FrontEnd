@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getBook, addReview } from '../../actions';
+import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
@@ -53,6 +55,7 @@ class BookDetail extends Component {
         </div>
         <img src={this.props.cover_url} alt={this.props.title} />
         <div className={style.BookDetail__review} onClick={this.handleToggleReview}>Review</div>
+        { this.props.isbn && <a target='_blank' rel='noopener noreferrer' href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}>Buy</a> }
         <div>{this.props.description}</div>
         <Comments />
         {

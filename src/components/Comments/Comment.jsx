@@ -10,6 +10,7 @@ const Comment = (props) => {
         className={style.Comment__rating}
         value={props.rating}
         edit={false}
+        size={24}
       />
       <div className={style.Comment__comment}>
         {props.comment}

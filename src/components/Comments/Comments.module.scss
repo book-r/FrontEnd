@@ -1,3 +1,5 @@
+@import '../../styles/__variables';
+
 .Comments {
   // max-width: 700px;
   text-align: left;
@@ -11,9 +13,12 @@
   border: 1px solid #dbdbdb;
   padding: 20px;
   margin: 20px 0;
+  border-radius: 3px;
+  background: $neutral-light-accent;
 
   &__username {
     font-weight: 600;
+    font-size: 20px;
   }
 
   &__rating {
@@ -22,5 +27,6 @@
 
   &__comment {
     margin: 10px 0;
+    font-size: 18px;
   }
 }

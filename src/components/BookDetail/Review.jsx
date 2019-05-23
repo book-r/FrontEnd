@@ -32,7 +32,6 @@ class Review extends Component {
   }
 
   handleOnSubmit = event => {
-    console.log(this.props);
     event.preventDefault();
     this.props.handleSubmitReview({
       ...this.state,
@@ -62,7 +61,7 @@ class Review extends Component {
           <div className={style.ReviewModal__form} ref={node => this.node = node}>
             <h2>Create Review</h2>
             <div className={style.ReviewModal__header}>
-              <img className={style.ReviewModal__thumbnail} src={this.props.cover_url} alt={`${this.props.title} cover thumbnail`}/>
+              <img className={style.ReviewModal__image__thumbnail} src={this.props.cover_url} alt={`${this.props.title} cover thumbnail`}/>
               <h3 className={style.ReviewModal__title}>{this.props.title}</h3>
             </div>
             <h3>Rating</h3>

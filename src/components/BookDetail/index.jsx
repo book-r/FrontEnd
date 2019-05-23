@@ -7,6 +7,7 @@ import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
+import noCover from '../../assets/temp_bkCover.png';
 
 class BookDetail extends Component {
   state = {
@@ -35,31 +36,50 @@ class BookDetail extends Component {
     });
   }
 
+  imgError(event) {
+    console.log('test', event.target);
+    event.target.src = noCover;
+  }
+
   render() { 
     return (
       <div className={style.BookDetail}>
-        <h3>
-          Single Book Detail Page
-        </h3>
-        <div className={style.BookDetail__title}>
-          {this.props.title}
-          <ReactStars
-            value={this.props.average}
-            count={5}
-            size={18}
-            edit={false}
-            color2={'#ffd700'}
-            className={style.BookDetail__rating}
-          />
+        <div className={style.BookDetail__info}>
+          <div className={style.BookDetail__image}>
+            <img src={this.props.cover_url} onError={this.imgError} alt={this.props.title} />
+            <div className={style.BookDetail__image__backup}></div>
+          </div>
+
+          <div className={style.BookDetail__info__block}>
+            <h3 className={style.BookDetail__title}>
+              {this.props.title}
+            </h3>
+            <div className={style.BookDetail__rating__wrapper}>
+              <ReactStars
+                value={this.props.average}
+                count={5}
+                size={18}
+                edit={false}
+                color2={'#ffd700'}
+                className={style.BookDetail__rating}
+              />
+              <span className={style.BookDetail__review} onClick={this.handleToggleReview}>
+                {
+                  !this.props.user_review ? '(review)' : '(edit review)'
+                }
+              </span>
+            </div>
+            <div className={style.BookDetail__description}>{this.props.description}</div>
+            { this.props.isbn
+              && <a
+                className={style.BookDetail__buyButton}
+                target='_blank'
+                rel='noopener noreferrer'
+                href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}
+              >Buy</a> }
+          </div>
         </div>
-        <img src={this.props.cover_url} alt={this.props.title} />
-        <div className={style.BookDetail__review} onClick={this.handleToggleReview}>
-          {
-            !this.props.user_rating ? 'Review' : 'Edit Review'
-          }
-        </div>
-        { this.props.isbn && <a target='_blank' rel='noopener noreferrer' href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}>Buy</a> }
-        <div>{this.props.description}</div>
+
         <Comments />
         {
           this.state.reviewing && <Review
@@ -67,11 +87,7 @@ class BookDetail extends Component {
             handleSubmitReview={this.handleSubmitReview}
             title={this.props.title}
             cover_url={this.props.cover_url}
-            user_review={
-              this.props.user_rating
-                ? { ...this.props.reviews.filter(review => review.user_id === this.props.userId )[0] }
-                : null
-            }
+            user_review={this.props.user_review}
           />
         }
       </div>

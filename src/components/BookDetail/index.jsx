@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
+import ReactStars from 'react-stars';
 
 import { getBook, submitReview } from '../../actions';
 import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
-import noCover from '../../assets/temp_bkCover.png';
 
 class BookDetail extends Component {
   state = {
@@ -30,15 +29,18 @@ class BookDetail extends Component {
   }
 
   handleToggleReview = () => {
-    this.setState({
-      ...this.state,
-      reviewing: !this.state.reviewing,
-    });
+    if (!this.props.match) {
+      this.props.redirectToJoin();
+    } else {
+      this.setState({
+        ...this.state,
+        reviewing: !this.state.reviewing,
+      });
+    }
   }
 
   imgError(event) {
-    console.log('test', event.target);
-    event.target.src = noCover;
+    event.target.style.display = 'none';
   }
 
   render() { 
@@ -47,7 +49,9 @@ class BookDetail extends Component {
         <div className={style.BookDetail__info}>
           <div className={style.BookDetail__image}>
             <img src={this.props.cover_url} onError={this.imgError} alt={this.props.title} />
-            <div className={style.BookDetail__image__backup}></div>
+            <div className={style.BookDetail__image__backup}>
+              <div className={style.BookDetail__image__title}>{this.props.title}</div>
+            </div>
           </div>
 
           <div className={style.BookDetail__info__block}>

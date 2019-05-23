@@ -1,3 +1,5 @@
+@import '../../styles/_variables';
+
 .Catalog {
   margin-top: 40px;
   display: flex;
@@ -13,5 +15,40 @@
     width: 100%;
     object-fit: fill;
     height: 100%;
+  }
+
+  &__image {
+    // min-width: 360px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    img {
+      z-index: 1;
+      border-radius: 3px;
+    }
+
+    &__backup {
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__title {
+      width: 80%;
+      height: 80%;
+      border: 2px solid $neutral-medium-accent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      box-sizing: border-box;
+    }
   }
 }

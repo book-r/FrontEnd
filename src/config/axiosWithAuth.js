@@ -2,10 +2,10 @@ import axios from 'axios';
 import auth from '../helpers/auth';
 
 const axiosWithAuth = () => {
-  const authToken = auth.get();
+  const { token } = auth.get();
   return axios.create({
     headers: {
-      Authorization: authToken,
+      Authorization: token,
     }
   });
 };

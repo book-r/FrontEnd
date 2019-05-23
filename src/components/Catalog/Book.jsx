@@ -6,6 +6,15 @@ import style from './Catalog.module.scss';
 const Book = (props) => {
   return (
     <Link className={style.Book} to={`/book/${props.id}`}>
+      {/* <div
+        className={style.Book__image}
+        style={
+          {
+            background: `url(${props.cover_url})`
+          }
+        }
+      >
+      </div> */}
       <img src={props.cover_url} alt={props.title} />
     </Link>
   );

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Book from './Book';
 import { getBooks } from '../../actions';
+import Book from './Book';
+import style from './Catalog.module.scss';
+
 
 class Catalog extends Component {
 
@@ -13,8 +15,7 @@ class Catalog extends Component {
 
   render() { 
     return (
-      <div className="Catalog">
-        <h3>Catalog Page</h3>
+      <div className={style.Catalog}>
         {
           this.props.books.map(book => (
             <Book {...book} key={book.id} />

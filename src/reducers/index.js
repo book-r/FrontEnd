@@ -102,6 +102,7 @@ const rootReducer = (state = initialState, action) => {
         asyncAction: false,
         bookDetail: {
           ...state.bookDetail,
+          user_rating: action.payload.rating,
           reviews: [
             ...state.bookDetail.reviews,
             action.payload,
@@ -109,7 +110,6 @@ const rootReducer = (state = initialState, action) => {
         }
       };
     case EDIT_REVIEW_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         asyncAction: false,

@@ -25,12 +25,13 @@ export const authenticate = (credentials, action) => dispatch => {
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
       const { token, username, id } = data;
+
       auth.add({
         id,
         username,
         token,
       });
-      console.log(data)
+
       dispatch({
         type: AUTH_SUCCESS,
         payload: {
@@ -123,12 +124,19 @@ export const submitReview = review => dispatch => {
   });
 
   const method = review.id ? 'put' : 'post';
-
-  console.log(method, 'id', review.id);
-
-  axiosWithAuth()[method](`${baseEndpoint}/reviews/${review.id}`, review)
+  
+  if (!review.id) {
+    const { user_id, book_id, rating, comment } = review;
+    review = {
+      user_id,
+      book_id,
+      rating,
+      comment,
+    }
+  }
+  
+  axiosWithAuth()[method](`${baseEndpoint}/reviews${review.id ? `/${review.id}` : ''}`, review)
   .then(({ data }) => {
-    console.log("ID", !review.id ? ADD_REVIEW_SUCCESS : EDIT_REVIEW_SUCCESS)
     dispatch({
       type: !review.id ? ADD_REVIEW_SUCCESS : EDIT_REVIEW_SUCCESS,
       payload: data,

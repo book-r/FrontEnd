@@ -36,7 +36,7 @@ class Review extends Component {
     event.preventDefault();
     this.props.handleSubmitReview({
       ...this.state,
-      id: this.props.user_review.id,
+      id: this.props.user_review ? this.props.user_review.id : null,
     });
     this.props.handleToggleReview();
   }

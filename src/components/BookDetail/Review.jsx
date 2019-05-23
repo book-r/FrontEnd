@@ -63,7 +63,6 @@ class Review extends Component {
               onChange={this.handleRating}
               size={42}
               half={false}
-              // color1={'#53616F'}
               color2={'#ffd700'}
               className={style.ReviewModal__form__stars}
             />

@@ -14,8 +14,8 @@
     width: 100%;
     max-width: 1200px;
     color: $neutral-light;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 18px;
+    padding: 25px;
     font-family: $font-headers;
   }
 
@@ -28,5 +28,4 @@
 
 .Logout {
   cursor: pointer;
-  // text-decoration: underline;
 }

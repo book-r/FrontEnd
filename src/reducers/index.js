@@ -12,9 +12,10 @@ import {
   AUTH_FAIL,
   AUTH_REMOVE,
 
-  ADD_REVIEW_START,
+  SUBMIT_REVIEW_START,
   ADD_REVIEW_SUCCESS,
-  ADD_REVIEW_FAIL,
+  EDIT_REVIEW_SUCCESS,
+  SUBMIT_REVIEW_FAIL,
 } from '../actions';
 
 const initialState = ({
@@ -90,7 +91,7 @@ const rootReducer = (state = initialState, action) => {
       return state;
 
     // REVIEW REDUCERS
-    case ADD_REVIEW_START: 
+    case SUBMIT_REVIEW_START: 
       return {
         ...state,
         asyncAction: action.type,
@@ -107,7 +108,19 @@ const rootReducer = (state = initialState, action) => {
           ]
         }
       };
-    case ADD_REVIEW_FAIL:
+    case EDIT_REVIEW_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        asyncAction: false,
+        bookDetail: {
+          ...state.bookDetail,
+          reviews: state.bookDetail.reviews.map(review => {
+            return review.id === action.payload.id ? action.payload : review;
+          }),
+        }
+      }
+    case SUBMIT_REVIEW_FAIL:
       return {
         ...state,
         asyncAction: false,

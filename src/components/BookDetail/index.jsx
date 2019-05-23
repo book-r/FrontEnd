@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import { connect } from 'react-redux';
 
-import { getBook, addReview } from '../../actions';
+import { getBook, submitReview } from '../../actions';
 import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
@@ -20,8 +20,8 @@ class BookDetail extends Component {
     }
   }
 
-  handleAddReview = review => {
-    this.props.addReview({
+  handleSubmitReview = review => {
+    this.props.submitReview({
       ...review,
       book_id: this.props.id,
       user_id: this.props.userId,
@@ -53,16 +53,25 @@ class BookDetail extends Component {
           />
         </div>
         <img src={this.props.cover_url} alt={this.props.title} />
-        <div className={style.BookDetail__review} onClick={this.handleToggleReview}>Review</div>
+        <div className={style.BookDetail__review} onClick={this.handleToggleReview}>
+          {
+            !this.props.user_rating ? 'Review' : 'Edit Review'
+          }
+        </div>
         { this.props.isbn && <a target='_blank' rel='noopener noreferrer' href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}>Buy</a> }
         <div>{this.props.description}</div>
         <Comments />
         {
           this.state.reviewing && <Review
             handleToggleReview={this.handleToggleReview}
-            handleAddReview={this.handleAddReview}
+            handleSubmitReview={this.handleSubmitReview}
             title={this.props.title}
             cover_url={this.props.cover_url}
+            user_review={
+              this.props.user_rating
+                ? { ...this.props.reviews.filter(review => review.user_id === this.props.userId )[0] }
+                : null
+            }
           />
         }
       </div>
@@ -70,11 +79,9 @@ class BookDetail extends Component {
   }
 }
 
-// TODO: Cleanup ownProps or use them
-
 const mapStateToProps = ({ bookDetail, user: { id: userId } }) => ({
   ...bookDetail,
   userId,
 });
  
-export default connect(mapStateToProps, { getBook, addReview })(BookDetail);
+export default connect(mapStateToProps, { getBook, submitReview })(BookDetail);

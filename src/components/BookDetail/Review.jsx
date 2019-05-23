@@ -11,6 +11,14 @@ class Review extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleBlur, false);
+    
+    if (this.props.user_review) {
+      this.setState({
+        ...this.state,
+        rating: this.props.user_review.rating,
+        comment: this.props.user_review.comment,
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -24,10 +32,11 @@ class Review extends Component {
   }
 
   handleOnSubmit = event => {
+    console.log(this.props);
     event.preventDefault();
-    console.log('payload:', {...this.state});
-    this.props.handleAddReview({
+    this.props.handleSubmitReview({
       ...this.state,
+      id: this.props.user_review.id,
     });
     this.props.handleToggleReview();
   }
@@ -72,7 +81,7 @@ class Review extends Component {
                 className={style.ReviewModal__form__comment}
                 name="comment"
                 id="comment"
-                placeholder="This book was..."
+                placeholder='This book was...'
                 value={this.state.comment}
                 onChange={this.handleComment}
               />
@@ -86,7 +95,7 @@ class Review extends Component {
                 <input
                   className={style.ReviewModal__form__submit}
                   type='submit'
-                  value='Submit Review'
+                  value={ !this.props.user_review ? 'Submit Review' : 'Edit Review' }
                 />
               </div>
             </form>

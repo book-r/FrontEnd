@@ -98,7 +98,7 @@ export const getBook = id => dispatch => {
     type: GET_BOOK_START,
   });
   
-  return axios
+  return axiosWithAuth()
     .get(`${baseEndpoint}/books/${id}`)
     .then(({ data }) => {
       dispatch({
@@ -112,21 +112,25 @@ export const getBook = id => dispatch => {
 }
 
 // Review Actions
-export const ADD_REVIEW_START = 'ADD_REVIEW_START';
+export const SUBMIT_REVIEW_START = 'SUBMIT_REVIEW_START';
 export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
-export const ADD_REVIEW_FAIL = 'ADD_REVIEW_FAIL';
+export const EDIT_REVIEW_SUCCESS = 'EDIT_REVIEW_SUCCESS';
+export const SUBMIT_REVIEW_FAIL = 'SUBMIT_REVIEW_FAIL';
 
-export const addReview = review => dispatch => {
+export const submitReview = review => dispatch => {
   dispatch({
-    type: ADD_REVIEW_START,
+    type: SUBMIT_REVIEW_START,
   });
 
-  axiosWithAuth()
-  .post(`${baseEndpoint}/reviews`, review)
+  const method = review.id ? 'put' : 'post';
+
+  console.log(method, 'id', review.id);
+
+  axiosWithAuth()[method](`${baseEndpoint}/reviews/${review.id}`, review)
   .then(({ data }) => {
-    console.log(data);
+    console.log("ID", !review.id ? ADD_REVIEW_SUCCESS : EDIT_REVIEW_SUCCESS)
     dispatch({
-      type: ADD_REVIEW_SUCCESS,
+      type: !review.id ? ADD_REVIEW_SUCCESS : EDIT_REVIEW_SUCCESS,
       payload: data,
     });
   })

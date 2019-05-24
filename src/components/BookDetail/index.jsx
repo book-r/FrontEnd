@@ -107,13 +107,15 @@ class BookDetail extends Component {
               >Buy</a> }
           </div>
           {
-            this.props.roles.indexOf('admin') >= 0
+            this.props.userId &&
+            (this.props.roles.indexOf('admin') >= 0
               && <span
                 onClick={this.onDeleteBook}
                 className={style.BookDetail__delete}
               >
                 &times;
               </span>
+            )
           }
         </div>
 

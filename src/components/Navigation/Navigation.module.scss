@@ -28,6 +28,18 @@
       filter: brightness(0.95);
     }
   }
+
+  &__join {
+    color: $neutral-light;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid $primary;
+
+    &:hover {
+      color: darken($neutral-light, 5);
+      border-bottom: 1px solid darken($neutral-light, 5);
+    }
+  }
 }
 
 .Logout {

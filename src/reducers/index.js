@@ -22,7 +22,6 @@ import {
   DELETE_BOOK_SUCCESS,
   DELETE_REVIEW_SUCCESS,
 } from '../actions';
-import { stat } from 'fs';
 
 const initialState = ({
   books: [],

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { logout } from '../../actions';
@@ -13,6 +13,12 @@ const Navigation = (props) => {
     props.history.push('/');
   }
 
+  const Join = () => {
+    return (
+      <Link className={style.Navigation__join} to='/join'>Sign Up</Link>
+    )
+  }
+
   return (
     <div className={style.Navigation}>
       <nav>
@@ -20,7 +26,7 @@ const Navigation = (props) => {
           <img src={logo} alt='booker logo' />
         </Link>
         {
-          props.auth && <span className={style.Logout} onClick={handleLogOut}>Log Out</span> // : <Link to='/login'>Log In</Link>
+          props.auth ? <span className={style.Logout} onClick={handleLogOut}>Log Out</span> : <Route path='/featured' component={Join} /> // : <Link to='/login'>Log In</Link>
         }
       </nav>
     </div>

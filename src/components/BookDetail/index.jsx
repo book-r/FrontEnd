@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactStars from 'react-stars';
 
-import { getBook, submitReview, getBySubject, deleteBook } from '../../actions';
+import { getBook, submitReview, deleteBook } from '../../actions';
 import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
@@ -15,13 +15,13 @@ class BookDetail extends Component {
   
   componentDidMount() {
     const { match, getBook } = this.props;
-    const id = this.props.subjects ? this.props.subjects[0].id : null;
+    // const id = this.props.subjects ? this.props.subjects[0].id : null;
     if (match) {
       getBook(match.params.id);
     }
-    if (id) {
-      this.props.getBySubject(id);
-    }
+    // if (id) {
+    //   this.props.getBySubject(id);
+    // }
   }
 
   handleSubmitReview = review => {
@@ -43,12 +43,17 @@ class BookDetail extends Component {
     }
   }
 
-  imgError(event) {
+  imgError = (event) => {
     event.target.style.display = 'none';
   }
 
-  onLoad(event) {
+  onLoad = (event) =>  {
     event.target.style.display = 'block';
+  }
+
+  onDeleteBook = () => {
+    this.props.deleteBook();
+    this.props.history.push('/');
   }
 
   render() {
@@ -102,7 +107,7 @@ class BookDetail extends Component {
           {
             this.props.role === 'admin'
               && <span
-                onClick={this.props.deleteBook}
+                onClick={this.onDeleteBook}
                 className={style.BookDetail__delete}
               >
                 &times;
@@ -138,6 +143,6 @@ const mapStateToProps = ({ bookDetail, user: { id: userId, role }, relatedBooks 
 export default connect(mapStateToProps, {
   getBook,
   submitReview,
-  getBySubject,
+  // getBySubject,
   deleteBook,
 })(BookDetail);

@@ -80,6 +80,7 @@ class BookDetail extends Component {
                 return current.name;
               }, '')}</div>
             }
+            <div className={style.BookDetail__publisher}>Published By {this.props.publisher}</div>
             <div className={style.BookDetail__rating__wrapper}>
               <ReactStars
                 value={this.props.average}

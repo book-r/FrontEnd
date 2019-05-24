@@ -17,10 +17,10 @@ const Login = (props) => {
       password,
     }, action);
   }
-  
+
   return (
     <>
-      <form className={style.AuthForm__form} onSubmit={handleOnSubmit}>
+      <form className={style.AuthForm__form} onSubmit={handleOnSubmit} >
         <input
           className={style.AuthForm__form__text}
           type='text'

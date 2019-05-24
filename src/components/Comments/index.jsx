@@ -8,6 +8,11 @@ const Comments = (props) => {
   return (
     <div className={style.Comments}>
       <h3>Reviews</h3>
+      <div className={style.Comments__create} onClick={props.handleToggleReview}>
+        {
+          props.user_review ? 'Edit Review' : 'Write a Review'
+        }
+      </div>
       {props.reviews.map(review => review.comment && <Comment {...review} key={review.id} userId={props.userId} />)}
     </div>
   );

@@ -47,6 +47,8 @@
     padding-top: 0;
     border: 1px solid $neutral-medium-accent;
     min-width: 700px;
+    transition: all;
+    position: relative;
   }
 
   &__form {
@@ -79,4 +81,12 @@
       cursor: pointer;
     }
   }
+}
+
+@keyframes shake {
+  0% { left: 0; }
+  25% { left: -10px; }
+  50% { left: 10px; }
+  75% { left: -5px; }
+  100% { left: 0; }
 }

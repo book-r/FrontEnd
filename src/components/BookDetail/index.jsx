@@ -7,7 +7,7 @@ import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
-import BookList from './BookList';
+// import BookList from './BookList';
 
 class BookDetail extends Component {
   state = {
@@ -16,8 +16,12 @@ class BookDetail extends Component {
   
   componentDidMount() {
     const { match, getBook } = this.props;
+    const id = this.props.subjects ? this.props.subjects[0].id : null;
     if (match) {
       getBook(match.params.id);
+    }
+    if (id) {
+      this.props.getBySubject(id);
     }
   }
 
@@ -59,7 +63,7 @@ class BookDetail extends Component {
     event.target.style.display = 'block';
   }
 
-  render() { 
+  render() {
     return (
       <div className={style.BookDetail}>
         <div className={style.BookDetail__info}>
@@ -74,6 +78,14 @@ class BookDetail extends Component {
             <h3 className={style.BookDetail__title}>
               {this.props.title}
             </h3>
+            {
+              this.props.authors.length > 0 && <div>By {this.props.authors.reduce((prev, current) => {
+                if (prev) {
+                  return prev + ', ' + current.name;
+                }
+                return current.name;
+              }, '')}</div>
+            }
             <div className={style.BookDetail__rating__wrapper}>
               <ReactStars
                 value={this.props.average}
@@ -100,9 +112,9 @@ class BookDetail extends Component {
           </div>
         </div>
 
-        {/* <BookList books={this.getList()} /> */}
+        {/* { this.props.subjects && <BookList books={this.props.relatedBooks} /> } */}
 
-        <Comments />
+        <Comments handleToggleReview={this.handleToggleReview} user_review={this.props.user_review} />
         {
           this.state.reviewing && <Review
             handleToggleReview={this.handleToggleReview}
@@ -117,9 +129,10 @@ class BookDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ bookDetail, user: { id: userId } }) => ({
+const mapStateToProps = ({ bookDetail, user: { id: userId }, relatedBooks }) => ({
   ...bookDetail,
   userId,
+  relatedBooks,
 });
  
 export default connect(mapStateToProps, { getBook, submitReview, getBySubject })(BookDetail);

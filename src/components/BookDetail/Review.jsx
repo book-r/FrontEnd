@@ -5,7 +5,7 @@ import style from './BookDetail.module.scss';
 
 class Review extends Component {
   state = {
-    rating: 0,
+    rating: 1,
     comment: '',
   };
 
@@ -70,7 +70,6 @@ class Review extends Component {
               count={5}
               onChange={this.handleRating}
               size={42}
-              half={false}
               color2={'#ffd700'}
               className={style.ReviewModal__form__stars}
             />

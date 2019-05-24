@@ -43,6 +43,10 @@ export const authenticate = (credentials, action) => dispatch => {
     })
     .catch(({ response }) => {
       console.log(cleanError(response));
+      dispatch({
+        type: AUTH_FAIL,
+        payload: cleanError(response),
+      });
     });
 }
 
@@ -156,5 +160,13 @@ export const submitReview = review => dispatch => {
   })
   .catch(({ response }) => {
     console.log(cleanError(response));
+  });
+}
+
+// Errors
+export const REMOVE_ERROR = 'REMOVE_ERROR';
+export const removeError = () => dispatch => {
+  dispatch({
+    type: REMOVE_ERROR,
   });
 }

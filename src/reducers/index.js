@@ -16,6 +16,8 @@ import {
   ADD_REVIEW_SUCCESS,
   EDIT_REVIEW_SUCCESS,
   SUBMIT_REVIEW_FAIL,
+
+  REMOVE_ERROR,
 } from '../actions';
 
 const initialState = ({
@@ -23,8 +25,10 @@ const initialState = ({
   asyncAction: false,
   error: '',
   bookDetail: {
-    reviews: []
+    reviews: [],
+    authors: [],
   },
+  relatedBooks: [],
   user: {
     name: '',
     token: false,
@@ -125,6 +129,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         asyncAction: false,
         error: action.payload,
+      };
+
+    case REMOVE_ERROR:
+      return {
+        ...state,
+        error: '',
       };
 
     default:

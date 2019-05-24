@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import { authenticate } from '../../actions';
+import { authenticate, removeError } from '../../actions';
 import Login from './Login';
 import Join from './Join';
 import style from './AuthForm.module.scss';
@@ -11,6 +11,12 @@ class AuthForm extends Component {
   state = {
     username: '',
     password: '',
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    setTimeout(() => {
+      this.props.removeError();
+    }, 330);
   }
 
   handleOnChange = (event) => {
@@ -27,9 +33,10 @@ class AuthForm extends Component {
       background: '#FCFCFC',
       cursor: 'inherit',
     };
+
     return this.props.auth ? <Redirect to='/' /> : (
       <div className={style.AuthForm}>
-        <div className={style.AuthForm__wrapper}>
+        <div className={style.AuthForm__wrapper} style={ this.props.error ? { animation: `${style.shake} 0.33s`} : null }>
           <nav className={style.AuthForm__nav}>
             <NavLink activeStyle={activeStyle} className={style.AuthForm__nav__login} to='/login'>Login</NavLink>
             <NavLink activeStyle={activeStyle} className={style.AuthForm__nav__join} to='/join'>Sign Up</NavLink>
@@ -65,8 +72,9 @@ class AuthForm extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
+const mapStateToProps = ({ auth, error }) => ({
   auth,
+  error,
 });
 
-export default connect(mapStateToProps, { authenticate })(AuthForm);
+export default connect(mapStateToProps, { authenticate, removeError })(AuthForm);

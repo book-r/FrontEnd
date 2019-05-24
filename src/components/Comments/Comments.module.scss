@@ -1,9 +1,23 @@
 @import '../../styles/__variables';
 
 .Comments {
-  // max-width: 700px;
   text-align: left;
   margin: 0 auto;
+
+  &__create {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 3px;
+    background: $neutral-light-accent;
+    cursor: pointer;
+    font-size: 18px;
+    border: 1px solid $neutral-medium-accent;
+    color: $neutral-dark;
+
+    &:hover {
+      background: darken($neutral-light-accent, 5);
+    }
+  }
 }
 
 .Comment {

@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactStars from 'react-stars';
 
-import { getBook, submitReview, getBySubject } from '../../actions';
+import { getBook, submitReview, getBySubject, deleteBook } from '../../actions';
 import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
-// import BookList from './BookList';
 
 class BookDetail extends Component {
   state = {
@@ -44,17 +43,6 @@ class BookDetail extends Component {
     }
   }
 
-  // getList = () => {
-  //   if (!this.props.match) {
-  //     // get featured books;
-  //     return
-  //   }
-  //   if (this.props.subjects) {
-  //     // get books by subject;
-  //     this.props.getBySubject(this.props.subjects[0].id);
-  //   }
-  // }
-
   imgError(event) {
     event.target.style.display = 'none';
   }
@@ -72,6 +60,7 @@ class BookDetail extends Component {
             <div className={style.BookDetail__image__backup}>
               <div className={style.BookDetail__image__title}>{this.props.title}</div>
             </div>
+            
           </div>
 
           <div className={style.BookDetail__info__block}>
@@ -110,9 +99,8 @@ class BookDetail extends Component {
                 href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}
               >Buy</a> }
           </div>
+          { this.props.role === 'admin' && <span onClick={this.props.deleteBook} className={style.BookDetail__delete}>&times;</span>}
         </div>
-
-        {/* { this.props.subjects && <BookList books={this.props.relatedBooks} /> } */}
 
         <Comments handleToggleReview={this.handleToggleReview} user_review={this.props.user_review} />
         {
@@ -129,10 +117,11 @@ class BookDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ bookDetail, user: { id: userId }, relatedBooks }) => ({
+const mapStateToProps = ({ bookDetail, user: { id: userId, role }, relatedBooks }) => ({
   ...bookDetail,
   userId,
   relatedBooks,
+  role,
 });
  
-export default connect(mapStateToProps, { getBook, submitReview, getBySubject })(BookDetail);
+export default connect(mapStateToProps, { getBook, submitReview, getBySubject, deleteBook })(BookDetail);

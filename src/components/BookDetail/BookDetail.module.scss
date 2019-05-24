@@ -16,6 +16,13 @@
     }
   }
 
+  &__delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 38px;
+  }
+
   &__image {
     min-width: 360px;
     position: relative;

@@ -2,7 +2,6 @@ import axios from "axios";
 import axiosWithAuth from '../config/axiosWithAuth';
 import auth from '../helpers/auth';
 
-// const baseEndpoint = 'http://localhost:3500/api';
 const baseEndpoint = 'https://lambda-bookr.herokuapp.com/api';
 
 const cleanError = (response) => {
@@ -25,7 +24,8 @@ export const authenticate = (credentials, action) => dispatch => {
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
       const { token, username, id } = data;
-
+      
+      // TODO: Add role here if backend gets to it
       auth.add({
         id,
         username,
@@ -126,6 +126,28 @@ export const getBySubject = subject => dispatch => {
       console.log(data);
     })
     .catch();
+}
+
+// Admin
+export const DELETE_BOOK_START = 'DELETE_BOOK_START';
+export const DELETE_BOOK_SUCCESS = 'DELETE_BOOK_SUCCESS';
+export const DELETE_BOOK_FAIL = 'DELETE_BOOK_FAIL';
+export const deleteBook = id => dispatch => {
+  dispatch({
+    type: DELETE_BOOK_START,
+  });
+
+  axiosWithAuth()
+    .delete(`${baseEndpoint}/books/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: DELETE_BOOK_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(({ response }) => {
+      console.log(cleanError(response));
+    });
 }
 
 // Review Actions

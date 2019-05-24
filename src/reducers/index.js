@@ -18,6 +18,8 @@ import {
   SUBMIT_REVIEW_FAIL,
 
   REMOVE_ERROR,
+  DELETE_BOOK_START,
+  DELETE_BOOK_SUCCESS,
 } from '../actions';
 
 const initialState = ({
@@ -135,6 +137,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
+      };
+
+    case DELETE_BOOK_START:
+      return {
+        ...state,
+        asyncAction: action.type,
+      };
+    case DELETE_BOOK_SUCCESS:
+      return {
+        ...state,
+        books: state.books.filter(book => book.id !== action.payload),
       };
 
     default:

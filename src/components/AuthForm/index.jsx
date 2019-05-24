@@ -6,6 +6,7 @@ import { authenticate, removeError } from '../../actions';
 import Login from './Login';
 import Join from './Join';
 import style from './AuthForm.module.scss';
+import { toast } from 'react-toastify';
 
 class AuthForm extends Component {
   state = {
@@ -13,10 +14,17 @@ class AuthForm extends Component {
     password: '',
   }
 
+  componentDidMount() {
+    // toast('Toasty');
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    setTimeout(() => {
-      this.props.removeError();
-    }, 330);
+    if (this.props.error) {
+      setTimeout(() => {
+        this.props.removeError();
+      }, 330);
+      toast.error(this.props.error);
+    }
   }
 
   handleOnChange = (event) => {

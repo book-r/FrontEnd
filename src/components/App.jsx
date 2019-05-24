@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import style from './App.module.scss';
 import AuthForm from './AuthForm';
@@ -10,6 +12,10 @@ import BookDetail from './BookDetail';
 import PrivateRoute from './PrivateRoute';
 import Navigation from './Navigation';
 import { checkAuth } from '../actions';
+
+toast.configure({
+  position: toast.POSITION.BOTTOM_CENTER,
+});
 
 const App = (props) => {
   props.checkAuth();

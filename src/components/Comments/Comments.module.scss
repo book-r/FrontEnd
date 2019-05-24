@@ -29,6 +29,15 @@
   margin: 20px 0;
   border-radius: 3px;
   background: $neutral-light-accent;
+  position: relative;
+
+  &__delete {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 38px;
+    cursor: pointer;
+  }
 
   &__username {
     font-weight: 600;

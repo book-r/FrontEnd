@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { deleteReview } from '../../actions';
 import Comment from './Comment';
 import style from './Comments.module.scss'
 
@@ -13,7 +14,7 @@ const Comments = (props) => {
           props.user_review ? 'Edit Review' : 'Write a Review'
         }
       </div>
-      {props.reviews.map(review => review.comment && <Comment {...review} key={review.id} userId={props.userId} />)}
+      {props.reviews.map(review => review.comment && <Comment{...review} key={review.id} deleteReview={props.deleteReview} userId={props.userId} />)}
     </div>
   );
 }
@@ -24,4 +25,4 @@ const mapStateToProps = ({ bookDetail: { id, reviews }, user: { id: userId } }) 
   userId,
 });
 
-export default connect(mapStateToProps, { })(Comments);
+export default connect(mapStateToProps, { deleteReview })(Comments);

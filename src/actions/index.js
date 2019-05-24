@@ -155,6 +155,7 @@ export const SUBMIT_REVIEW_START = 'SUBMIT_REVIEW_START';
 export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
 export const EDIT_REVIEW_SUCCESS = 'EDIT_REVIEW_SUCCESS';
 export const SUBMIT_REVIEW_FAIL = 'SUBMIT_REVIEW_FAIL';
+export const DELETE_REVIEW_SUCCESS = 'DELETE_REVIEW_SUCCESS';
 
 export const submitReview = review => dispatch => {
   dispatch({
@@ -184,6 +185,20 @@ export const submitReview = review => dispatch => {
     console.log(cleanError(response));
   });
 }
+
+export const deleteReview = id => dispatch => {
+  axiosWithAuth()
+    .delete(`${baseEndpoint}/reviews/${id}`)
+    .then(() => {
+      dispatch({
+        type: DELETE_REVIEW_SUCCESS,
+        payload: id,
+      });
+    })
+    .catch(({ response }) => {
+      console.log(cleanError(response));
+    });
+};
 
 // Errors
 export const REMOVE_ERROR = 'REMOVE_ERROR';

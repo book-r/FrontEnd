@@ -99,10 +99,21 @@ class BookDetail extends Component {
                 href={`https://www.amazon.com/dp/product/${convertISBN(this.props.isbn.toString())}`}
               >Buy</a> }
           </div>
-          { this.props.role === 'admin' && <span onClick={this.props.deleteBook} className={style.BookDetail__delete}>&times;</span>}
+          {
+            this.props.role === 'admin'
+              && <span
+                onClick={this.props.deleteBook}
+                className={style.BookDetail__delete}
+              >
+                &times;
+              </span>
+          }
         </div>
 
-        <Comments handleToggleReview={this.handleToggleReview} user_review={this.props.user_review} />
+        <Comments
+          handleToggleReview={this.handleToggleReview}
+          user_review={this.props.user_review}
+        />
         {
           this.state.reviewing && <Review
             handleToggleReview={this.handleToggleReview}
@@ -124,4 +135,9 @@ const mapStateToProps = ({ bookDetail, user: { id: userId, role }, relatedBooks 
   role,
 });
  
-export default connect(mapStateToProps, { getBook, submitReview, getBySubject, deleteBook })(BookDetail);
+export default connect(mapStateToProps, {
+  getBook,
+  submitReview,
+  getBySubject,
+  deleteBook,
+})(BookDetail);

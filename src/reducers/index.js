@@ -20,7 +20,9 @@ import {
   REMOVE_ERROR,
   DELETE_BOOK_START,
   DELETE_BOOK_SUCCESS,
+  DELETE_REVIEW_SUCCESS,
 } from '../actions';
+import { stat } from 'fs';
 
 const initialState = ({
   books: [],
@@ -126,6 +128,14 @@ const rootReducer = (state = initialState, action) => {
           }),
         }
       }
+    case DELETE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        bookDetail: {
+          ...state.bookDetail,
+          reviews: state.bookDetail.reviews.filter(review => review.id !== action.payload),
+        }
+      };
     case SUBMIT_REVIEW_FAIL:
       return {
         ...state,
@@ -149,6 +159,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books: state.books.filter(book => book.id !== action.payload),
       };
+    
 
     default:
       return state;

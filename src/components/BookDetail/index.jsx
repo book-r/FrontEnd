@@ -57,6 +57,7 @@ class BookDetail extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className={style.BookDetail}>
         <div className={style.BookDetail__info}>
@@ -106,7 +107,7 @@ class BookDetail extends Component {
               >Buy</a> }
           </div>
           {
-            this.props.role === 'admin'
+            this.props.roles.indexOf('admin') >= 0
               && <span
                 onClick={this.onDeleteBook}
                 className={style.BookDetail__delete}
@@ -134,11 +135,11 @@ class BookDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ bookDetail, user: { id: userId, role }, relatedBooks }) => ({
+const mapStateToProps = ({ bookDetail, user: { id: userId, roles }, relatedBooks }) => ({
   ...bookDetail,
   userId,
   relatedBooks,
-  role,
+  roles,
 });
  
 export default connect(mapStateToProps, {

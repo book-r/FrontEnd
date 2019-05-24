@@ -23,13 +23,15 @@ export const authenticate = (credentials, action) => dispatch => {
   axios
     .post(`${baseEndpoint}/auth/${action}`, credentials)
     .then(({ data }) => {
-      const { token, username, id } = data;
+      const { token, username, id, roles } = data;
+      console.log('user response', data);
       
       // TODO: Add role here if backend gets to it
       auth.add({
         id,
         username,
         token,
+        roles,
       });
 
       dispatch({
@@ -38,11 +40,13 @@ export const authenticate = (credentials, action) => dispatch => {
           id,
           username,
           token,
+          roles: roles || [],
         },
       });
     })
     .catch(({ response }) => {
       console.log(cleanError(response));
+      console.log(response);
       dispatch({
         type: AUTH_FAIL,
         payload: cleanError(response),

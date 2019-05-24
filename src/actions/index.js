@@ -111,6 +111,18 @@ export const getBook = id => dispatch => {
       console.log(cleanError(response));
     });
 }
+export const getBySubject = subject => dispatch => {
+  dispatch({
+    type: GET_BOOKS_START,
+  });
+
+  axiosWithAuth()
+    .get(`${baseEndpoint}/subjects/${subject}`)
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch();
+}
 
 // Review Actions
 export const SUBMIT_REVIEW_START = 'SUBMIT_REVIEW_START';

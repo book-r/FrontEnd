@@ -9,7 +9,8 @@
 }
 
 .Book {
-  width: 33%;
+  width: 30%;
+  margin: 1%;
 
   img {
     width: 100%;
@@ -18,16 +19,20 @@
   }
 
   &__image {
-    // min-width: 360px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
+    color: $neutral-dark;
+    font-size: 20px;
 
     img {
       z-index: 1;
       border-radius: 3px;
+      // width: 100%;
+      // height: 100%;
+      // object-fit: fill;
     }
 
     &__backup {

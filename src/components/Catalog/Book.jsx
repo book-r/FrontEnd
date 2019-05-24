@@ -9,16 +9,6 @@ const Book = (props) => {
   }
   return (
     <Link className={style.Book} to={`/book/${props.id}`}>
-      {/* <div
-        className={style.Book__image}
-        style={
-          {
-            background: `url(${props.cover_url})`
-          }
-        }
-      >
-      </div> */}
-      {/* <img src={props.cover_url} alt={props.title} /> */}
       <div className={style.Book__image}>
         <img src={props.cover_url} onError={imgError} alt={props.title} />
         <div className={style.Book__image__backup}>

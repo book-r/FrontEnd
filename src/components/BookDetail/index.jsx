@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactStars from 'react-stars';
 
-import { getBook, submitReview } from '../../actions';
+import { getBook, submitReview, getBySubject } from '../../actions';
 import convertISBN from '../../helpers/isbn';
 import Review from './Review';
 import style from './BookDetail.module.scss';
 import Comments from '../Comments';
+import BookList from './BookList';
 
 class BookDetail extends Component {
   state = {
@@ -39,8 +40,23 @@ class BookDetail extends Component {
     }
   }
 
+  // getList = () => {
+  //   if (!this.props.match) {
+  //     // get featured books;
+  //     return
+  //   }
+  //   if (this.props.subjects) {
+  //     // get books by subject;
+  //     this.props.getBySubject(this.props.subjects[0].id);
+  //   }
+  // }
+
   imgError(event) {
     event.target.style.display = 'none';
+  }
+
+  onLoad(event) {
+    event.target.style.display = 'block';
   }
 
   render() { 
@@ -48,7 +64,7 @@ class BookDetail extends Component {
       <div className={style.BookDetail}>
         <div className={style.BookDetail__info}>
           <div className={style.BookDetail__image}>
-            <img src={this.props.cover_url} onError={this.imgError} alt={this.props.title} />
+            <img src={this.props.cover_url} onLoad={this.onLoad} onError={this.imgError} alt={this.props.title} />
             <div className={style.BookDetail__image__backup}>
               <div className={style.BookDetail__image__title}>{this.props.title}</div>
             </div>
@@ -84,6 +100,8 @@ class BookDetail extends Component {
           </div>
         </div>
 
+        {/* <BookList books={this.getList()} /> */}
+
         <Comments />
         {
           this.state.reviewing && <Review
@@ -104,4 +122,4 @@ const mapStateToProps = ({ bookDetail, user: { id: userId } }) => ({
   userId,
 });
  
-export default connect(mapStateToProps, { getBook, submitReview })(BookDetail);
+export default connect(mapStateToProps, { getBook, submitReview, getBySubject })(BookDetail);

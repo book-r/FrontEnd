@@ -134,7 +134,8 @@ const rootReducer = (state = initialState, action) => {
         bookDetail: {
           ...state.bookDetail,
           reviews: state.bookDetail.reviews.filter(review => review.id !== action.payload),
-        }
+          user_review: null,
+        },
       };
     case SUBMIT_REVIEW_FAIL:
       return {

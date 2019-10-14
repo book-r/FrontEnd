@@ -1,0 +1,28 @@
+@import '../styles/_variables';
+
+body {
+  overflow-y: scroll;
+  background: $neutral-light;
+  color: $neutral-dark;
+}
+
+html, body {
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-headers;
+}
+
+h3 {
+  font-size: 24px;
+}

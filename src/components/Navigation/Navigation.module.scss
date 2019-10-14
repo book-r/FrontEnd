@@ -1,0 +1,54 @@
+@import '../../styles/_variables';
+
+.Navigation {
+  background: $primary;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    color: $neutral-light;
+    font-size: 18px;
+    padding: 25px;
+    font-family: $font-headers;
+  }
+
+  &__logo {
+    img {
+      height: 50px;
+    }
+
+    &:hover img {
+      filter: brightness(0.95);
+    }
+  }
+
+  &__join {
+    color: $neutral-light;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid $primary;
+
+    &:hover {
+      color: darken($neutral-light, 5);
+      border-bottom: 1px solid darken($neutral-light, 5);
+    }
+  }
+}
+
+.Logout {
+  cursor: pointer;
+  box-sizing: border-box;
+  border-bottom: 1px solid $primary;
+  
+  &:hover {
+    color: darken($neutral-light, 5);
+    border-bottom: 1px solid darken($neutral-light, 5);
+  }
+}

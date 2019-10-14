@@ -1,0 +1,59 @@
+@import '../../styles/_variables';
+
+.Catalog {
+  margin-top: 40px;
+  display: flex;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.Book {
+  width: 30%;
+  margin: 1%;
+
+  img {
+    width: 100%;
+    object-fit: fill;
+    height: 100%;
+  }
+
+  &__image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $neutral-dark;
+    font-size: 20px;
+
+    img {
+      z-index: 1;
+      border-radius: 3px;
+      // width: 100%;
+      // height: 100%;
+      // object-fit: fill;
+    }
+
+    &__backup {
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__title {
+      width: 80%;
+      height: 80%;
+      border: 2px solid $neutral-medium-accent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+  }
+}
